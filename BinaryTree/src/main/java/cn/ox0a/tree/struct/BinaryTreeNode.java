@@ -94,7 +94,8 @@ public class BinaryTreeNode<V> extends BaseTreeNode<V> {
         super(value);
     }
 
-    public BinaryTreeNode(BinaryTreeNode left, BinaryTreeNode right){
+    public BinaryTreeNode(BinaryTreeNode left, BinaryTreeNode right, BinaryTreeNode parent, V value){
+        super(parent, value);
         this.left = left;
         this.right = right;
     }

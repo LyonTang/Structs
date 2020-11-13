@@ -18,6 +18,10 @@ public class Runner {
     static BinaryTree tree = new BinaryTree();
 
     public static void main(String[] args) {
+        orderBinary();
+    }
+
+    public static void orderBinary(){
         BinaryTreeNode<String> node = new BinaryTreeNode<String>("A");
         BinaryTreeNode<String>[] nodes = new BinaryTreeNode[AC];
         for (int i = 0; i < AC; i++){
@@ -38,11 +42,24 @@ public class Runner {
         }*/
 
         List<BinaryTreeNode> vistor = new ArrayList<BinaryTreeNode>();
+        if(tree.preorder(vistor)) {
+            for (BinaryTreeNode n : vistor) {
+                System.out.print(n.getValue());
+            }
+        }
+        System.out.println();
+        if(tree.inorder(vistor)) {
+            for (BinaryTreeNode n : vistor) {
+                System.out.print(n.getValue());
+            }
+        }
+        System.out.println();
         if(tree.postorder(vistor)) {
             for (BinaryTreeNode n : vistor) {
                 System.out.print(n.getValue());
             }
         }
+
 
     }
 }
