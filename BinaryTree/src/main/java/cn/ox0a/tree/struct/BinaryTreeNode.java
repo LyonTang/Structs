@@ -10,7 +10,7 @@ import java.util.List;
  * @Date 2020-11-12 16:07
  * @Version 1.0
  */
-public class BinaryTreeNode<V> extends BaseTreeNode<V> {
+public class BinaryTreeNode<V extends Comparable> extends BaseTreeNode<V> {
 
     private BinaryTreeNode<V> left;
     private BinaryTreeNode<V> right;

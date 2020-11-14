@@ -54,7 +54,8 @@ public class Runner {
             }
         }
         System.out.println();
-        if(tree.postorder(vistor)) {
+        
+        if(tree.postorder(vistor, new BinaryTreeNode("G"))) {
             for (BinaryTreeNode n : vistor) {
                 System.out.print(n.getValue());
             }

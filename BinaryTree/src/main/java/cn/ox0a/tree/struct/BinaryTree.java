@@ -8,7 +8,7 @@ import java.util.*;
  * @Date 2020-11-12 19:40
  * @Version 1.0
  */
-public class BinaryTree<E> {
+public class BinaryTree<E extends Comparable> {
     private BinaryTreeNode<E> root;
 
     public BinaryTree(){
@@ -34,6 +34,30 @@ public class BinaryTree<E> {
         return stack;
     }
 
+    private void pushRightNoCheck(Stack<BinaryTreeNode> stack, BinaryTreeNode node){
+        BinaryTreeNode child;
+        if((child = node.getRightChild()) != null) {
+            stack.push(child);
+        }
+    }
+
+    /**
+     * 出栈操作
+     * @param stack 栈
+     * @param visitor 访问链
+     * @param target 目标访问元素
+     * @return 栈顶元素
+     */
+    private BinaryTreeNode visit(Stack<BinaryTreeNode> stack, List<BinaryTreeNode> visitor, BinaryTreeNode target){
+        BinaryTreeNode node = stack.pop();
+        visitor.add(node);
+        // 找到具体节点，不再继续访问
+        if(target != null && target.value != null && target.value.equals(node.value)){
+            return null;
+        }
+        return node;
+    }
+
     // 序的概念是相对父节点的，其左右次序不变，总是先左后右
     /**
      * 先序遍历（父节点优先）
@@ -48,15 +72,11 @@ public class BinaryTree<E> {
         }
         BinaryTreeNode node, child;
         while (!stack.empty()){
-            node = stack.pop();
-            visitor.add(node);
-            if(target != null && target.value == node.value){
+            if((node = visit(stack, visitor, target)) == null){
                 return true;
             }
             // 先入栈右孩子
-            if((child = node.getRightChild()) != null) {
-                stack.push(child);
-            }
+            pushRightNoCheck(stack, node);
             if((child = node.getLeftChild()) != null) {
                 stack.push(child);
             }
@@ -91,15 +111,11 @@ public class BinaryTree<E> {
                 stack.push(child);
             } else {
                 // 找到最左侧子孙节点，出栈
-                node = stack.pop();
-                visitor.add(node);
-                if(target != null && target.value == node.value){
+                if((node = visit(stack, visitor, target)) == null){
                     return true;
                 }
                 // 如果有右孩子，入栈继续找右孩子最左侧子孙节点
-                if((child = node.getRightChild()) != null) {
-                    stack.push(child);
-                }
+                pushRightNoCheck(stack, node);
             }
         }
         return true;
@@ -127,6 +143,7 @@ public class BinaryTree<E> {
         }
         BinaryTreeNode node, child;
         while (!stack.empty()){
+            // 有孩子的情况应靠后考虑出栈该节点
             boolean pushed = false;
             node = stack.peek();
             // 保证右孩子先入栈
@@ -139,9 +156,7 @@ public class BinaryTree<E> {
                 pushed = true;
             }
             if(!pushed){
-                node = stack.pop();
-                visitor.add(node);
-                if(target != null && target.value == node.value){
+                if(visit(stack, visitor, target) == null){
                     return true;
                 }
             }
