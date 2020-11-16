@@ -120,7 +120,6 @@ public class BinaryTree<E extends Comparable> {
         }
         return true;
     }
-
     /**
      * 中序遍历
      * @param visitor
@@ -163,8 +162,99 @@ public class BinaryTree<E extends Comparable> {
         }
         return true;
     }
-
+    /**
+     * 后序遍历
+     * @param visitor
+     * @return
+     */
     public boolean postorder(List<BinaryTreeNode> visitor){
         return postorder(visitor, null);
+    }
+
+
+
+
+    /**
+     * 先序遍历递归实现
+     * @param visitor
+     * @param node
+     */
+    private void preorder2(List<BinaryTreeNode> visitor, BinaryTreeNode node){
+        visitor.add(node);
+        BinaryTreeNode child;
+        if((child = node.getLeftChild()) != null) {
+            preorder2(visitor, child);
+        }
+        if((child = node.getRightChild()) != null){
+            preorder2(visitor, child);
+        }
+    }
+    public void preorder2(List<BinaryTreeNode> visitor){
+        visitor.clear();
+        preorder2(visitor, root);
+    }
+    /**
+     * 中序遍历递归实现
+     * @param visitor
+     * @param node
+     */
+    private void inorder2(List<BinaryTreeNode> visitor, BinaryTreeNode node){
+        BinaryTreeNode child;
+        if((child = node.getLeftChild()) != null){
+            inorder2(visitor, child);
+        }
+        visitor.add(node);
+        if((child = node.getRightChild()) != null){
+            inorder2(visitor, child);
+        }
+    }
+    public void inorder2(List<BinaryTreeNode> visitor){
+        visitor.clear();
+        inorder2(visitor, root);
+    }
+    /**
+     * 后序遍历递归实现
+     * @param visitor
+     * @param node
+     */
+    private void postorder2(List<BinaryTreeNode> visitor, BinaryTreeNode node){
+        if(node == null) {
+            return;
+        }
+        postorder2(visitor, node.getLeftChild());
+        postorder2(visitor, node.getRightChild());
+        visitor.add(node);
+    }
+    public void postorder2(List<BinaryTreeNode> visitor){
+        visitor.clear();
+        postorder2(visitor, root);
+    }
+
+
+    // 网上看到非递归实现的算法，终于解决了visitor.contains的问题
+    public void preorder3(List<BinaryTreeNode> visitor){
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+        BinaryTreeNode node = root;
+        visitor.clear();
+        while (node != null || !stack.empty()){
+            while (node != null){
+                visitor.add(node);
+                stack.push(node);
+                node = node.getLeftChild();
+            }
+            if(!stack.empty()){
+                BinaryTreeNode temp = stack.pop();
+                node = temp.getRightChild();
+            }
+        }
+    }
+
+    public void inorder3(List<BinaryTreeNode> visitor){
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+        BinaryTreeNode node = root;
+        visitor.clear();
+        while (node != null || !stack.empty()){
+
+        }
     }
 }

@@ -41,26 +41,37 @@ public class Runner {
             nodes[i].setRight(nodes[i+1]);
         }*/
 
-        List<BinaryTreeNode> vistor = new ArrayList<BinaryTreeNode>();
-        if(tree.preorder(vistor)) {
-            for (BinaryTreeNode n : vistor) {
+        List<BinaryTreeNode> visitor = new ArrayList<BinaryTreeNode>();
+        if(tree.preorder(visitor)) {
+            for (BinaryTreeNode n : visitor) {
                 System.out.print(n.getValue());
             }
         }
         System.out.println();
-        if(tree.inorder(vistor)) {
-            for (BinaryTreeNode n : vistor) {
+        if(tree.inorder(visitor)) {
+            for (BinaryTreeNode n : visitor) {
                 System.out.print(n.getValue());
             }
         }
         System.out.println();
-        
-        if(tree.postorder(vistor, new BinaryTreeNode("G"))) {
-            for (BinaryTreeNode n : vistor) {
+
+        if(tree.postorder(visitor, new BinaryTreeNode("G"))) {
+            for (BinaryTreeNode n : visitor) {
                 System.out.print(n.getValue());
             }
         }
+        System.out.println();
 
+        tree.preorder3(visitor);
+        for (BinaryTreeNode n : visitor) {
+            System.out.print(n.getValue());
+        }
+        System.out.println();
 
+        tree.inorder2(visitor);
+        for (BinaryTreeNode n : visitor) {
+            System.out.print(n.getValue());
+        }
+        System.out.println();
     }
 }
