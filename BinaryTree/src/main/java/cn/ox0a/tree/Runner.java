@@ -55,7 +55,7 @@ public class Runner {
         }
         System.out.println();
 
-        if(tree.postorder(visitor, new BinaryTreeNode("G"))) {
+        if(tree.postorder(visitor/*, new BinaryTreeNode("G")*/)) {
             for (BinaryTreeNode n : visitor) {
                 System.out.print(n.getValue());
             }
@@ -68,7 +68,19 @@ public class Runner {
         }
         System.out.println();
 
-        tree.inorder2(visitor);
+        tree.inorder3(visitor);
+        for (BinaryTreeNode n : visitor) {
+            System.out.print(n.getValue());
+        }
+        System.out.println();
+
+        tree.postorder3(visitor);
+        for (BinaryTreeNode n : visitor) {
+            System.out.print(n.getValue());
+        }
+        System.out.println();
+
+        tree.levelOrder(visitor);
         for (BinaryTreeNode n : visitor) {
             System.out.print(n.getValue());
         }

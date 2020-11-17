@@ -248,13 +248,74 @@ public class BinaryTree<E extends Comparable> {
             }
         }
     }
-
     public void inorder3(List<BinaryTreeNode> visitor){
         Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
         BinaryTreeNode node = root;
         visitor.clear();
         while (node != null || !stack.empty()){
+            // 找到最左侧孩子
+            while (node != null){
+                stack.push(node);
+                node = node.getLeftChild();
+            }
+            if(!stack.empty()){
+                BinaryTreeNode top = stack.pop();
+                visitor.add(top);
+                node = top.getRightChild();
+            }
+        }
+    }
 
+    /**
+     * 后续遍历
+     * 这个代码用上一个访问节点作为判断条件，解释了为何访问，虽然实现简单，
+     * 但想到这层却也不是那么容易
+     * @param visitor
+     */
+    public void postorder3(List<BinaryTreeNode> visitor){
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+        BinaryTreeNode node = root;
+        BinaryTreeNode lastNode = null;
+        visitor.clear();
+        while (node != null || !stack.empty()){
+            while (node != null){
+                stack.push(node);
+                node = node.getLeftChild();
+            }
+            if(!stack.empty()){
+                BinaryTreeNode top = stack.pop();
+                // 任何节点的右孩子节点后都是紧接着该节点
+                // 如果lastNode == rightChild，说明该节点尚未访问，且需要出栈
+                // 最先的算法局限在何时入栈，忽略了出栈
+                if(top.getRightChild() == null || top.getRightChild() == lastNode){
+                    visitor.add(top);
+                    lastNode = top;
+                }else {
+                    stack.push(top);
+                    node = top.getRightChild();
+                }
+            }
+        }
+    }
+
+
+
+
+    // 层次遍历，这个我在做图形客户端时常用于图形拓扑查找，类似广度遍历
+    public void levelOrder(List<BinaryTreeNode> visitor){
+        visitor.clear();
+        LinkedList<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            BinaryTreeNode node = queue.poll();
+            visitor.add(node);
+            BinaryTreeNode child;
+            if(null != (child = node.getLeftChild())){
+                queue.add(child);
+            }
+            if(null != (child = node.getRightChild())){
+                queue.add(child);
+            }
         }
     }
 }
