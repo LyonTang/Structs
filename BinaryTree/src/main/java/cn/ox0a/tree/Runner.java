@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Runner {
     static int AC = 8;
-    static BinaryTree tree = new BinaryTree();
+    static BinaryTree<String> tree = new BinaryTree<String>();
 
     public static void main(String[] args) {
         orderBinary();
@@ -41,49 +41,5 @@ public class Runner {
             nodes[i].setRight(nodes[i+1]);
         }*/
 
-        List<BinaryTreeNode> visitor = new ArrayList<BinaryTreeNode>();
-        if(tree.preorder(visitor)) {
-            for (BinaryTreeNode n : visitor) {
-                System.out.print(n.getValue());
-            }
-        }
-        System.out.println();
-        if(tree.inorder(visitor)) {
-            for (BinaryTreeNode n : visitor) {
-                System.out.print(n.getValue());
-            }
-        }
-        System.out.println();
-
-        if(tree.postorder(visitor/*, new BinaryTreeNode("G")*/)) {
-            for (BinaryTreeNode n : visitor) {
-                System.out.print(n.getValue());
-            }
-        }
-        System.out.println();
-
-        tree.preorder3(visitor);
-        for (BinaryTreeNode n : visitor) {
-            System.out.print(n.getValue());
-        }
-        System.out.println();
-
-        tree.inorder3(visitor);
-        for (BinaryTreeNode n : visitor) {
-            System.out.print(n.getValue());
-        }
-        System.out.println();
-
-        tree.postorder3(visitor);
-        for (BinaryTreeNode n : visitor) {
-            System.out.print(n.getValue());
-        }
-        System.out.println();
-
-        tree.levelOrder(visitor);
-        for (BinaryTreeNode n : visitor) {
-            System.out.print(n.getValue());
-        }
-        System.out.println();
     }
 }
