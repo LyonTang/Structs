@@ -2,6 +2,7 @@ package cn.ox0a.tree.struct;
 
 import org.junit.Assert;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,8 @@ public class BinaryTreeTest {
 
     @org.junit.Test
     public void preorder1() {
-        tree.preorder(visitor, new BinaryTreeNode<String>("G"));
+        BinaryTreeNode target = new BinaryTreeNode<String>(String.valueOf(PRE.charAt(PRE.length() - 3)));
+        tree.preorder(visitor, target);
         Assert.assertEquals(visit(visitor), PRE.substring(0, PRE.length() - 2));
     }
 
@@ -63,7 +65,8 @@ public class BinaryTreeTest {
 
     @org.junit.Test
     public void inorder1() {
-        tree.inorder(visitor, new BinaryTreeNode<String>("F"));
+        BinaryTreeNode target = new BinaryTreeNode<String>(String.valueOf(IN.charAt(IN.length() - 3)));
+        tree.inorder(visitor, target);
         Assert.assertEquals(visit(visitor), IN.substring(0, IN.length() - 2));
     }
 
@@ -75,7 +78,8 @@ public class BinaryTreeTest {
 
     @org.junit.Test
     public void postorder1() {
-        tree.postorder(visitor, new BinaryTreeNode<String>("H"));
+        BinaryTreeNode target = new BinaryTreeNode<String>(String.valueOf(POST.charAt(POST.length() - 3)));
+        tree.postorder(visitor, target);
         Assert.assertEquals(visit(visitor), POST.substring(0, POST.length() - 2));
     }
 
