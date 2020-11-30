@@ -1,12 +1,14 @@
 package cn.ox0a.tree.struct;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @Description 2-3树节点，包括2-节点，3-节点，4-节点
  * @Author 唐亮
  * @Date 2020-11-27 11:03
  * @Version 1.0
  */
-public class TwoThreeTreeNode<V extends Comparable> implements TreeNode {
+public class TwoThreeTreeNode<V extends Comparable<? super V>> implements TreeNode {
 
     private V min;
     private V mid;
@@ -223,5 +225,9 @@ public class TwoThreeTreeNode<V extends Comparable> implements TreeNode {
         s += getChildMinToMid() == null ? 0 : 1;
         s += getChildMidToMax() == null ? 0 : 1;
         return s;
+    }
+
+    public boolean contains(@NotNull V v){
+        return (min != null && min.compareTo(v) == 0) || (mid != null && mid.compareTo(v) == 0);
     }
 }

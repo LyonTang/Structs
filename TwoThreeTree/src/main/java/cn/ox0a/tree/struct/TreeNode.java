@@ -6,7 +6,7 @@ package cn.ox0a.tree.struct;
  * @Date 2020-11-26 19:31
  * @Version 1.0
  */
-public interface TreeNode<V extends Comparable> {
+public interface TreeNode<V extends Comparable<? super V>> {
     /**
      * 获取数值
      * @param index index
